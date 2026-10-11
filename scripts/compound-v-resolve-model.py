@@ -100,8 +100,8 @@ _CLAUDE_COST_AWARE = {"frontier": "opus", "deep": "opus",
 # tier and effort are orthogonal axes in this resolver, and Sol has no separate
 # "standard-strength" sibling the way Astra/Sol/Luna cover frontier/deep/light.
 # The older GPT-5.6 family (Sol/Terra/Luna, verified live 2026-07-10 on codex-cli
-# 0.144.1) is listed "Older ..." in the catalog and still works -- gpt-5.5 is
-# also still listed but retires 2026-10-14 (upgrade target per the catalog: gpt-6.1-sol as of 0.160.0). An
+# 0.144.1) is listed "Older ..." in the catalog and still works -- gpt-5.5 left the
+# catalog in codex-cli 0.162.1 (2026-10-11; it had been marked retiring 2026-10-14). An
 # under-floor client fails LOUD (not silent; the failure-policy retries once
 # then halts cleanly).
 _CODEX = {"frontier": "gpt-6-astra", "deep": "gpt-6.1-sol",

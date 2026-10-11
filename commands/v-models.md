@@ -124,8 +124,8 @@ command -v codex >/dev/null \
 
 - This prints JSON `{available:[...], proposed:{frontier,deep,standard,light}, retiring:[...], efforts_not_adopted:[...], note, backend}`.
   The script keeps only `visibility: list` models, drops any carrying an
-  `upgrade.retirement_at` (reported separately under `retiring` — e.g. `gpt-5.5` retires
-  2026-10-14; the catalog names its upgrade target, `gpt-6.1-sol` as of 0.160.0), and assigns tiers by the ROLE in each slug —
+  `upgrade.retirement_at` (reported separately under `retiring` — `gpt-5.5` was listed that way
+  until it left the catalog in codex-cli 0.162.1, 2026-10-11), and assigns tiers by the ROLE in each slug —
   `-astra` frontier, `-sol` deep/standard, `-luna` light — taking the newest version of
   each role (`gpt-6.1-sol` over `gpt-6-sol`). `priority` is not used for this: it is the
   picker's display order, and on codex-cli 0.159.1 the new workhorse `gpt-6.1-sol` sits at
