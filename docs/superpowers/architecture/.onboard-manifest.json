@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05",
+  "generated": "2026-10-11",
   "docs": {
     "docs/superpowers/architecture/architecture.md": {
       "cited": {
@@ -33,7 +33,7 @@
     "docs/superpowers/architecture/business-logic.md": {
       "cited": {
         ".claude-plugin/plugin.json": "01a5bbf09957c4b9809c69fdeaecc175a8217a6268e2dec7d5a475714b569826",
-        "AGENTS.md": "87838796e25d6f4ed69bd8f47e4da477d57319b93e9c4d4103875fed906ad146",
+        "AGENTS.md": "5a9bbeebb1c76d00f217d509839ca7b94fcf742b9ca1f5540c3b57b30b72ce61",
         "README.md": "2abefd7aecd1c382003b9cdccf055baa7263c871c8132c9835c38835ddf777d5",
         "agents/spec-reviewer.md": "54637927295a8863ed910e2c598e07ab75b130554338e35daabb4c6b3466e716",
         "skills/backend-launcher/SKILL.md": "181e2a31d1d563bfb1edec9e513d7bb40f50ca6579b815a62cfb358872d4f36b",
@@ -55,7 +55,7 @@
         "scripts/compound-v-integration-gate.py": "9b9fafb5fb81a980fb72b18240fc780c313e62e9add6009b985fd669ae4c2497",
         "scripts/compound-v-onboard.py": "18dd4773ef6fdbeb8fbcbe6428a0387816bde1df8f4b24b7e251b09b84a27459",
         "scripts/compound-v-preeval.py": "2757c13be4015fd7bde5f3250eda196dadc59c4a3c23a9fca77bcd96c57d1df2",
-        "scripts/compound-v-resolve-model.py": "b6eef48b3a91b4cfb8c1524253b21111e898eed5d5b4964c1b2ee71bb763e80b",
+        "scripts/compound-v-resolve-model.py": "fb7e0b0b38138d833c179fc365903ce9b20d28738cd0b74602edf4b2e3ddf815",
         "scripts/compound-v-scope-check.py": "a4a5b0a26b783ad468b769585556f2f8a20bf854f47b53fae261898bb4bc18f5",
         "scripts/compound-v-usage-aggregate.py": "d8e475038d5218fac4f01061da2f484bef91f47c09bf803746e095f30c3e3bef",
         "scripts/compound-v-usage-extract.py": "4552e3b2103c1b8a544b8455bdb0bc5a4376db47763bfc737e37cde2d99f6c51",
