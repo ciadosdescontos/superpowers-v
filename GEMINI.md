@@ -12,7 +12,7 @@ Compound V is a **sidekick to Superpowers**. It intercepts the four Superpowers 
    - Domain-expert advisor with three-layer audience search (product/regulatory reality)
    - Library/doc validator via Context7 MCP (dependency currency)
 2. **Disjoint File Partition Map enforcement** inside writing-plans, which **materializes a `manifest.yaml`** — the machine-readable contract that drives dispatch
-3. **Manifest-driven dispatch** on the most capable model available (Gemini 3.1 Pro or equivalent), with a **`git diff` scope gate after every job** (a worker that writes outside its `write_allowed` list is BLOCKED and never merges) and **crash-resume** via a `state.json` run directory
+3. **Manifest-driven dispatch** on the most capable model available (Gemini 4 Argon or equivalent), with a **`git diff` scope gate after every job** (a worker that writes outside its `write_allowed` list is BLOCKED and never merges) and **crash-resume** via a `state.json` run directory
 
 ## Orchestrator surface (v1.0 + 1.1)
 
@@ -46,7 +46,7 @@ Gemini's `activate_skill` tool can load the SKILL.md content on demand. Trigger:
 
 This plugin was authored for the Anthropic Claude family. On Gemini:
 
-- "Opus default" → **Gemini 3.1 Pro** (or whatever is currently the most capable model)
+- "Opus default" → **Gemini 4 Argon** (or whatever is currently the most capable model)
 - "Sonnet exception" → **Gemini 3.8 Flash** for the same narrow junior-task taxonomy
 - "Never Haiku" → Never use Gemini Flash-Lite or smaller; the project's reasoning bar is high
 

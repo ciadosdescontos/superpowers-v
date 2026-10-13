@@ -176,7 +176,7 @@ TRUNC_MARKER = "\n...[TRUNCATED]"
 DEPRECATION_LINE = "[features].codex_hooks is deprecated"
 
 _FALLBACK_CODEX_MODEL = "gpt-6-astra"  # mirrors resolve-model.py's codex/frontier default
-_FALLBACK_AGY_MODEL = "Gemini 3.1 Pro (High)"  # mirrors compound-v-resolve-model.py's antigravity/deep default
+_FALLBACK_AGY_MODEL = "Gemini 4 Argon (High)"  # mirrors compound-v-resolve-model.py's antigravity/deep default
 
 # Closed blocker-category enum (v2.14). A CONFIRMED external blocker requires the confirming
 # families to agree on the SAME missing-fact category, not merely the blocked_external label

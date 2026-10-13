@@ -107,7 +107,7 @@ agy has no output-schema flag. The worker accepts `--output-schema` for CLI pari
 
 ### Model + effort: resolved before dispatch, not hardcoded
 
-The dispatcher hands a routing **intent** — `tier` (`deep` \| `standard` \| `light`) — and resolves the concrete model **before** dispatch via [`scripts/compound-v-resolve-model.py`](../../scripts/compound-v-resolve-model.py) with `--backend antigravity --tier <tier> [--config .claude/compound-v.json]`. The built-in fallback map is `deep → Gemini 3.1 Pro (High)`, `standard → Gemini 3.1 Pro (Low)`, `light → Gemini 3.8 Flash (Low)` (verified against `agy models` 1.0.13); `/v:models` / `/v:init` discover the live catalog via `agy models </dev/null | compound-v-discover-models.py` and write `.claude/compound-v.json`, which overrides the fallback. An explicit manifest `model` override skips resolution and wins. agy has **no effort flag**, so `effort` is advisory for this backend (like Claude).
+The dispatcher hands a routing **intent** — `tier` (`deep` \| `standard` \| `light`) — and resolves the concrete model **before** dispatch via [`scripts/compound-v-resolve-model.py`](../../scripts/compound-v-resolve-model.py) with `--backend antigravity --tier <tier> [--config .claude/compound-v.json]`. The built-in fallback map is `deep → Gemini 4 Argon (High)`, `standard → Gemini 4 Argon (Low)`, `light → Gemini 3.8 Flash (Low)` (verified against `agy models` 1.3.4 on 2026-10-14, each answering a live `agy --print`; Gemini 3.1 Pro has left the catalog and is refused); `/v:models` / `/v:init` discover the live catalog via `agy models </dev/null | compound-v-discover-models.py` and write `.claude/compound-v.json`, which overrides the fallback. An explicit manifest `model` override skips resolution and wins. agy has **no effort flag**, so `effort` is advisory for this backend (like Claude).
 
 ### Timeout
 
@@ -169,7 +169,7 @@ On any non-zero `agy` exit the worker classifies the failure via [`scripts/compo
   --job-id   task-1-build \
   --repo     /abs/path/to/repo \
   --prompt-file /abs/path/to/jobs/task-1-build.prompt.md \
-  --model    "Gemini 3.1 Pro (High)" \
+  --model    "Gemini 4 Argon (High)" \
   --write-allowed "src/features/build/**" \
   --timeout-sec 900 \
   --network  false

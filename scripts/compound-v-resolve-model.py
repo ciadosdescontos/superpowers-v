@@ -112,8 +112,11 @@ _CODEX = {"frontier": "gpt-6-astra", "deep": "gpt-6.1-sol",
 # VERIFIED against `agy models` (1.1.22, 2026-09-03: 3.6/3.7/3.8 Flash + 3.1 Pro; light = the NEWEST Flash at Low). Effort is baked into the agy model NAME (no
 # separate effort flag); the worker omits --model if the value is empty. Gemini family
 # chosen for error-decorrelation; override with --model.
-_ANTIGRAVITY = {"frontier": "Gemini 3.1 Pro (High)", "deep": "Gemini 3.1 Pro (High)",
-                "standard": "Gemini 3.1 Pro (Low)", "light": "Gemini 3.8 Flash (Low)"}
+# 2026-10-14, agy 1.3.4: Gemini 3.1 Pro LEFT the catalog (`--model "Gemini 3.1 Pro (High)"`
+# is refused and agy prints the model list); Gemini 4 Argon (Low/Medium/High) arrived. Argon
+# High, Argon Low and 3.8 Flash Low each answered a live `agy --print` probe.
+_ANTIGRAVITY = {"frontier": "Gemini 4 Argon (High)", "deep": "Gemini 4 Argon (High)",
+                "standard": "Gemini 4 Argon (Low)", "light": "Gemini 3.8 Flash (Low)"}
 # Cursor (cursor-agent): "auto" is the SAFE DEFAULT for every tier — a FREE plan can ONLY
 # use Auto (named models error: "Named models unavailable"). Paid plans override per-tier
 # via /v:models — `cursor-agent models` lists the live catalog for manual discovery (not
@@ -609,7 +612,7 @@ def _selftest():
     # Antigravity (agy) curated map resolves for its strongest tier.
     expect(
         "antigravity/deep -> curated Gemini",
-        resolve("antigravity", "deep")["model"] == "Gemini 3.1 Pro (High)"
+        resolve("antigravity", "deep")["model"] == "Gemini 4 Argon (High)"
         and resolve("antigravity", "deep")["effort"] == "high",
     )
 

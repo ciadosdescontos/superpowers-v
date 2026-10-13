@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [3.8.5] - 2026-10-14
+
+### Fixed — Antigravity jobs would fail: Gemini 3.1 Pro left the catalog
+
+agy 1.3.4 dropped Gemini 3.1 Pro and added Gemini 4 Argon (Low, Medium, High). Our built-in Antigravity map still
+routed `frontier`, `deep` and `standard` to `Gemini 3.1 Pro`, which agy now refuses (it prints its model list
+instead of answering). Every Antigravity job and the arbiter's Gemini seat would have failed on a current agy.
+The defaults are now `Gemini 4 Argon (High)` for frontier and deep, `Gemini 4 Argon (Low)` for standard and
+`Gemini 3.8 Flash (Low)` for light; each answered a live `agy --print` probe on 2026-10-14. A project that pinned
+`Gemini 3.1 Pro` in `.claude/compound-v.json` must re-run `/v:models`.
+
+### Fixed — `/v:models` read every unfamiliar Gemini model as the cheap tier
+
+The Antigravity ranker looked for the substring `mini` to spot small models, and "Ge**mini**" contains it. Any
+Gemini line without `Pro` in its name was ranked with Flash; on the new catalog `/v:models` proposed
+`Gemini 4 Argon (Low)` for `light` and left 3.8 Flash out. Tier words are now matched as whole words after the
+family name (`ultra`, `pro`; `flash`, `spark`, `mini`, `lite`, `nano`), and an unknown tier name such as Argon
+counts as strong. On the live catalog the proposal is now Argon High / Argon High / Argon Low / 3.8 Flash Low.
+
 ## [3.8.4] - 2026-10-05
 
 ### Added — the run band shows account quota movement, and writes the lane guard could not check

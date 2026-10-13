@@ -54,13 +54,13 @@ everywhere else `standard` Claude is `sonnet`; and `cost-aware.claude.frontier` 
   "balanced": {
     "claude":      { "frontier": "fable", "deep": "opus",  "standard": "sonnet",                "light": "sonnet" },
     "codex":       { "frontier": "gpt-6-astra", "deep": "gpt-6.1-sol", "standard": "gpt-6.1-sol", "light": "gpt-6-luna" },
-    "antigravity": { "deep": "Gemini 3.1 Pro (High)", "standard": "Gemini 3.1 Pro (Low)", "light": "Gemini 3.8 Flash (Low)" },
+    "antigravity": { "deep": "Gemini 4 Argon (High)", "standard": "Gemini 4 Argon (Low)", "light": "Gemini 3.8 Flash (Low)" },
     "cursor":      { "deep": "auto",                  "standard": "auto",                  "light": "auto" }
   },
   "cost-aware": {
     "claude":      { "frontier": "opus",  "deep": "opus",  "standard": "sonnet",                "light": "sonnet" },
     "codex":       { "frontier": "gpt-6-astra", "deep": "gpt-6.1-sol", "standard": "gpt-6.1-sol", "light": "gpt-6-luna" },
-    "antigravity": { "deep": "Gemini 3.1 Pro (High)", "standard": "Gemini 3.1 Pro (Low)", "light": "Gemini 3.8 Flash (Low)" },
+    "antigravity": { "deep": "Gemini 4 Argon (High)", "standard": "Gemini 4 Argon (Low)", "light": "Gemini 3.8 Flash (Low)" },
     "cursor":      { "deep": "auto",                  "standard": "auto",                  "light": "auto" }
   }
   // claude-only mirrors balanced; conservative keeps standard on opus
@@ -178,10 +178,10 @@ command -v agy >/dev/null \
 - This prints JSON `{available:[...], proposed:{frontier,deep,standard,light}, note, backend}`. For antigravity (and every other external backend except codex) `frontier` is the same value as `deep` — no vendor there ships a rung above its own top model. Codex is the one exception: GPT-6 ships a dedicated frontier model (`gpt-6-astra`) above its workhorse `deep`/`standard` model (`gpt-6.1-sol`) — see §1b.
   **Show the user the `available` catalog and the `proposed` map**, then let them
   confirm or override (Step 2). The proposal is real, current model names — no more
-  placeholders. Against the live catalog (agy, re-read 2026-10-05: Gemini 3.6/3.7/3.8 Flash
-  Low/Medium/High, Gemini 3.1 Pro Low/High, Claude Opus/Sonnet 5.5 Low/Medium/High, GPT-OSS 120B
-  Medium — printed as `id<TAB>Display Name`; the script ranks on the display column) the
-  proposal is **frontier/deep: `Gemini 3.1 Pro (High)`, standard: `Gemini 3.1 Pro (Low)`,
+  placeholders. Against the live catalog (agy 1.3.4, re-read 2026-10-14: Gemini 4 Argon Low/Medium/High,
+  Gemini 3.8 Flash Low/Medium/High, Claude Opus/Sonnet 5.5 Low/Medium/High, GPT-OSS 120B
+  Medium; Gemini 3.1 Pro is gone) — printed as `id<TAB>Display Name`; the script ranks on the display column) the
+  proposal is **frontier/deep: `Gemini 4 Argon (High)`, standard: `Gemini 4 Argon (Low)`,
   light: `Gemini 3.8 Flash (Low)`**. Seeding a `/v:init`-shaped config (per-stance `models`)
   lands the map in every stance block — never as a flat sibling key (3.4.11).
 - To write the confirmed proposal straight into the config, use the `--write-config`
@@ -262,7 +262,7 @@ fast/cheap option → `light`). Example shape:
 |---|---|---|---|---|
 | claude | opus, sonnet | opus | opus | sonnet |
 | codex | gpt-6-astra, gpt-6.1-sol, gpt-6-luna | gpt-6.1-sol | gpt-6.1-sol | gpt-6-luna |
-| antigravity | *(from `agy models </dev/null`)* | Gemini 3.1 Pro (High) | Gemini 3.1 Pro (Low) | Gemini 3.8 Flash (Low) |
+| antigravity | *(from `agy models </dev/null`)* | Gemini 4 Argon (High) | Gemini 4 Argon (Low) | Gemini 3.8 Flash (Low) |
 | opencode | *(from `opencode models </dev/null`)* | anthropic/claude-opus-5-5 | openai/gpt-6.1-sol | opencode/mimo-v2.5-free |
 
 Then **let the user assign** each tier per backend — accept the suggestion as-is, or

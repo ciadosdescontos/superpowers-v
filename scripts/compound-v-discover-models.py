@@ -112,15 +112,18 @@ def _parse_line(line):
     # A tuple of ints, never a float: float("3.10") == 3.1 < 3.8 would rank a newer
     # generation below an older one (pr-review 2026-09-04 on the 3.4.14 ranker).
     version = tuple(int(x) for x in ver_m.group(1).split(".")) if ver_m else (0,)
-    low = series.lower()
-    if "ultra" in low:
+    # Whole words after the family name only. A substring test read "Gemini" as containing
+    # "mini" and ranked every unknown Gemini line as the cheap tier: Gemini 4 Argon became
+    # `light` (live, agy 1.3.4, 2026-10-14). "Pro" only escaped because it was tested first.
+    words = set(re.findall(r"[a-z]+", series.lower())[1:])
+    if "ultra" in words:
         strength = 3
-    elif "pro" in low:
+    elif "pro" in words:
         strength = 2
-    elif "flash" in low or "spark" in low or "mini" in low:
+    elif words & {"flash", "spark", "mini", "lite", "nano"}:
         strength = 1
     else:
-        strength = 2  # unknown tier — treat as mid/strong, not throwaway
+        strength = 2  # unknown tier name (e.g. "Argon") — treat as strong, not throwaway
     # effort_rank: default 2 (medium) when the catalog omits an effort suffix
     eff = 2
     for key, rank in _EFFORT_RANK.items():
@@ -478,6 +481,20 @@ def _selftest():
         check("merge preserves other keys", got.get("other") == 1)
     finally:
         os.unlink(path)
+
+    # agy 1.3.4 (live 2026-10-14): Gemini 3.1 Pro left the catalog; Gemini 4 Argon arrived,
+    # a tier name the ranker had never seen. "Gemini" must not read as "mini".
+    argon = ["gemini-4-argon-medium\tGemini 4 Argon (Medium)", "gemini-4-argon-high\tGemini 4 Argon (High)",
+             "gemini-4-argon-low\tGemini 4 Argon (Low)", "gemini-3.8-flash-high\tGemini 3.8 Flash (High)",
+             "gemini-3.8-flash-medium\tGemini 3.8 Flash (Medium)", "gemini-3.8-flash-low\tGemini 3.8 Flash (Low)",
+             "claude-opus-5-5-high\tClaude Opus 5.5 (High)", "gpt-oss-120b-medium\tGPT-OSS 120B (Medium)"]
+    ra = propose(argon)["proposed"]
+    check("agy 1.3.4: Argon is the strong series, the newest Flash is light, got %r" % (ra,),
+          ra == {"frontier": "Gemini 4 Argon (High)", "deep": "Gemini 4 Argon (High)",
+                 "standard": "Gemini 4 Argon (Low)", "light": "Gemini 3.8 Flash (Low)"})
+    check("'Gemini' is not the 'mini' tier",
+          _parse_line("Gemini 4 Argon (High)")["strength"] == 2
+          and _parse_line("GPT 5 mini (High)")["strength"] == 1)
 
     # --- codex: `codex debug models` JSON catalog (trimmed fixture off the 2026-09-24
     # probe on codex-cli 0.156.1 -- see compound-v-resolve-model.py's _CODEX comment for
